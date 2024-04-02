@@ -1,0 +1,66 @@
+{% load static %}
+
+<style>
+    .hover-animation{
+        position: relative;
+        overflow: hidden;
+      }
+      
+    .hover-animation::after{
+        content: "";
+        display: block;
+        height: 4px;
+        width: 100%;
+        background-color: #2bd576;
+        transform: scale(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+      
+    .hover-animation:hover::after{
+        transform: scale(1);
+    }
+    
+    .navbar{
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+    
+    .navbar-nav.ml-auto {
+        margin-left: auto;
+    }
+    
+    .navbar-nav.ml-auto .nav-item {
+        margin-right: 15px; 
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="{% url 'login' %}"><i>GPS Tracker</i>
+            <img src="{% static 'images/logo/parking-lot-logo.png' %}" style="height: 30px; width: 30px;" alt="gps">
+        </a>
+        <button class="navbar-toggler bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav navbar-nav-scroll ml-auto" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                    <a class="nav-link active text-white hover-animation" aria-current="page" href="{% url 'login' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-white hover-animation" aria-current="page" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-white hover-animation" href="/admin">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-white hover-animation" href="{% url 'register' %}">Register</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

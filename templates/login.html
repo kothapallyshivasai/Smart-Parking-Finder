@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    {% include 'includes.html' %}
+    <script>
+        function fields_check(event){
+            username = document.getElementById("username").value
+            password = document.getElementById("password").value
+            if(username == "" || password==""){
+                event.preventDefault()
+                swal("Error!", "Fill all your Details!", "error");
+            }
+        }        
+    </script>
+    <style>
+        @media (min-width: 768px) {
+            .full-height-image {
+                height: 93vh;
+                margin-top: 2px;
+            }
+        }
+        @media (max-width: 768px){
+            .margin-bottom-footer {
+                margin-bottom: 40px;
+            }
+            .full-height-image {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head> 
+<body>
+    {% include 'default_navbar.html' %}
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-md-8 p-0 order-md-2">
+                <img src="{% static 'images/background_images/login_image_cyberpunk.jpg' %}" class="img-fluid full-height-image" alt="Background Image" />
+            </div>
+            <div class="col-md-4 order-md-1 mt-5">
+                <h1 class="text-center mt-4"><img src="{% static 'images/logo/parking-lot-logo.png' %}" style="height: 50px; width: 50px;" alt="parking-lot" /> <strong>GPS Tracker</strong></h1>
+                <h3 class="text-center mt-2">Login</h3>
+                <div class="mt-4 text-center">
+                    Don't have an account? <a href="{% url 'register' %}" style="color: orange;">Register Now!</a>
+                </div>
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group mt-3">
+                        <div class="row">
+                            <div class="col-md-10 col-12 offset-md-1">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <div class="row">
+                            <div class="col-md-10 col-12 offset-md-1">
+                                <label for="password">Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password" name="password">
+                                </div>
+                                <a href="#" style="color: orange;">Forgot password?</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" onclick="fields_check(event)" style="width: 82%;" class="btn btn-primary btn-block mt-4">Login</button>
+                    </div>
+                    {% if messages %}
+                        <script>
+                            swal("Error!", "Invalid username or password!", "error");
+                        </script>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
